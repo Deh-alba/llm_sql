@@ -1,0 +1,9 @@
+openai
+langchain
+langchain-core
+langchain-openai
+langchain-community
+langchain-ollama
+langchain-text-splitters
+langchain_chroma
+langgraph

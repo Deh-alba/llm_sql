@@ -1,0 +1,32 @@
+services:
+
+  fastapi:
+    build:
+      context: ./api
+    container_name: sql_agent_back
+    ports:
+      - "8091:8000"
+    volumes:
+      - ./api:/app
+      - .:/usr/src/project:rw
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+  app:
+    build:
+      context: ./app
+    container_name: sql_app_front
+    ports:
+      - "8195:8080"
+    volumes:
+      - ./app:/app
+      - .:/usr/src/project
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - fastapi
+
+
+volumes:
+  sql_agent:
